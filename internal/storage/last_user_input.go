@@ -8,6 +8,7 @@ import (
 
 var NotFound error = errors.New("Not found")
 
+// todo добавить мютексы
 type LastUserInputStorage struct {
 	Input map[int64]string
 }
@@ -18,7 +19,7 @@ func NewLastUserInputStorage() (repos.LastUserInput, error) {
 	}, nil
 }
 
-func (s *LastUserInputStorage) Add(id int64, input string) error {
+func (s *LastUserInputStorage) Create(id int64, input string) error {
 	s.Input[id] = input
 
 	return nil
@@ -30,7 +31,7 @@ func (s *LastUserInputStorage) Delete(id int64) error {
 	return nil
 }
 
-func (s *LastUserInputStorage) Get(id int64) (string, error) {
+func (s *LastUserInputStorage) Find(id int64) (string, error) {
 	str, ok := s.Input[id]
 	if !ok {
 		return "", NotFound

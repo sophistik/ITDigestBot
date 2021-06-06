@@ -1,14 +1,16 @@
 package repos
 
-type UserTagsRepo interface {
-	Create(id int64, tags []string) error
-	Update(id int64, tags []string) error
-	Upsert(id int64, tags []string) error
-	Get(id int64) ([]string, error)
+import "github.com/sophistik/ITDigestBot/internal/entities"
+
+type UserRepo interface {
+	Create(user entities.User) error
+	Update(user entities.User) error
+	Find(id int64) (*entities.User, error)
+	Delete(id int64) error
 }
 
 type LastUserInput interface {
-	Add(id int64, input string) error
+	Create(id int64, input string) error
 	Delete(id int64) error
-	Get(id int64) (string, error)
+	Find(id int64) (string, error)
 }
